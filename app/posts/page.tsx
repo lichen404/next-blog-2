@@ -9,7 +9,7 @@ const AllUsersPage = async () => {
       <AddForm />
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{`${user.email} (ID: ${user.id})`}</li>
+          <li key={user.id}>{`${user.username} (ID: ${user.id})`}</li>
         ))}
       </ul>
     </>

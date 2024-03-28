@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { User } from '@/app/models/User';
+import { User } from '../models/User';
 
 const pgConnection = new DataSource({
     type: 'postgres',
@@ -8,7 +8,7 @@ const pgConnection = new DataSource({
     port: 5432,
     database: 'blog',
     username: 'blog',
-    synchronize: false,
+    synchronize: true,
     logging: true,
     entities: [User],
     migrations: [],

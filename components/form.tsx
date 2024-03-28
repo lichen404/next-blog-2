@@ -8,11 +8,14 @@ export const AddForm: FC = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        postUser({ email: e.currentTarget.email.value });
+        postUser({
+          username: e.currentTarget.username.value, password: e.currentTarget.password.value
+        });
         
       }}
     >
-      <input type="text" name="email" />
+      <input type="text" name="username" />
+      <input type="text" name="password" />
       <button type="submit">Add User</button>
     </form>
   );
