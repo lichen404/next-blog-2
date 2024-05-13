@@ -20,6 +20,15 @@ export const postUser = async (user: User): Promise<User> => {
   return JSON.parse(JSON.stringify(result));
 };
 
+export async function getUser(){
+  const session = await getSession();
+  if(session.userId){
+    const connection = await getDBConnection();
+    const data = await connection.getRepository(User).findOne({where: {id: session.userId}});
+    return JSON.parse(JSON.stringify(data));
+  }
+}
+
 export async function logout() {
   const session = await getSession();
   session.destroy();
@@ -30,6 +39,12 @@ export async function login(formData: FormData) {
   const inputUsername = formData.get("username") as string;
   const connection = await getDBConnection();
   const data = await connection.getRepository(User).findOne({where: {username: inputUsername,passwordDigest: md5(formData.get("password") as string)}});
-  session.userId = data?.id || 1;
-  await session.save();
+  if(data && data.id){
+    session.userId = data.id;
+    await session.save();
+  }
+  else {
+    return {error: "Invalid username or password"}
+  }
+  
 }

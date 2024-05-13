@@ -1,16 +1,25 @@
-import { getSession } from "@/actions/session";
+"use client";
 import { login } from "@/actions/user";
+import { useRouter } from 'next/navigation'
 
-const Login = async () => {
-    const id = (await getSession()).userId;
+const Login = () => {
+  const router = useRouter();
   return (
-    <>{id}
-      <form action={login}>
-        <input type="text" name="username" />
-        <input type="text" name="password" />
-        <button type="submit">Add User</button>
-      </form>
-    </>
+    <form
+      action={async (formData) => {
+        const errors = await login(formData);
+        if(errors){
+          window.alert(errors.error);
+        }
+        else {
+          router.push("/posts");
+        }
+      }}
+    >
+      <input type="text" name="username" />
+      <input type="text" name="password" />
+      <button type="submit">login</button>
+    </form>
   );
 };
 

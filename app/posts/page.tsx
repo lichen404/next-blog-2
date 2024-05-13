@@ -1,15 +1,18 @@
-import { getUsers } from "@/actions/user";
+import { getPosts } from "@/actions/post";
+import { getUser } from "@/actions/user";
 import { AddForm } from "@/components/form";
 
 const AllUsersPage = async () => {
-  const users = await getUsers();
+  const result = await getPosts();
+  const currentUser = await getUser();
 
   return (
     <>
+      <span>{currentUser?.username}</span>
       <AddForm />
       <ul>
-        {users.map((user) => (
-          <li key={user.id}>{`${user.username} (ID: ${user.id})`}</li>
+        {result?.posts.map((user) => (
+          <li key={user.id}>{user.content}</li>
         ))}
       </ul>
     </>

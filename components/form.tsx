@@ -2,6 +2,7 @@
 import { postUser } from "@/actions/user";
 
 import { FC } from "react";
+import {Button} from "./ui/button"
 
 export const AddForm: FC = () => {
   return (
@@ -16,7 +17,7 @@ export const AddForm: FC = () => {
     >
       <input type="text" name="username" />
       <input type="text" name="password" />
-      <button type="submit">Add User</button>
+      <Button type="submit">Add User</Button>
     </form>
   );
 };

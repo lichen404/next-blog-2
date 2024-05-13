@@ -7,17 +7,17 @@ export class User {
   id?: number;
 
   @Index({ unique: true })
-  @Column('varchar',{nullable:false})
+  @Column('varchar', { nullable: false })
   username?: string;
 
-  @Column('varchar',{nullable:false})
+  @Column('varchar', { nullable: false })
   passwordDigest?: string;
 
   @CreateDateColumn()
-  createdAt?:Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  updatedAt?:Date;
+  updatedAt?: Date;
 
   password?: string;
 }
